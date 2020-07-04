@@ -7,5 +7,5 @@ MarkupSafe==1.1.1
 Werkzeug==0.15.2
 requests
 bs4
-apiclient
+google-api-python-client
 urllib3
