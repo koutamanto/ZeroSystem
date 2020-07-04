@@ -12,48 +12,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
   </head>
   <body class="bg-dark">
-    <form class="text-center mt-5" action="/result" method="post">
-      <label class="text-primary font-weight-bold" for="word">YouTube検索</label>
-      <input type="text" name="word">
-      <button class="btn btn-primary" type="submit">送信</button>
-    </form>
     <div class="container-fluid">
-      <div class="header">
-        <h3 class="text-muted"></h3>
-        {% if message %}
-          <h1 style="font-family: 'Century Gothic';size: 300%; text-align: center; color:white;">{{message}}</h1>
-        {% endif %}
-        <div class="row">  
-        {% for title,url in data %}
-        <div class="col-lg-4 col-md-6">
-          <!--Card Narrower-->
-          <div class="card card-cascade narrower bg-info">
-            <!--Card image-->
-          <div class="view view-cascade overlay">
-            <img src="{{url}}" class="card-img-top"
-              alt="narrower">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <!--/.Card image-->
-
-          <!--Card content-->
-          <div class="card-body card-body-cascade">
-            <h5 class="pink-text"><i class="fas fa-utensils"></i>{{title}}</h5>
-            <!--Title-->
-            <h4 class="card-title">YouTube</h4>
-            <!--Text-->
-            <p class="card-text"></p>
-            <a class="btn btn-unique" href="#">見に行く</a>
-          </div>
-          <!--/.Card content-->
-
+        <div class="row pt-4 pl-4 pr-4">
+            <div class="col-xl-4 bg-primary">
+                <script>
+                    var now = new Date();
+                    var hour = now.getHours();
+                    var minute = now.getMinutes();
+                    var second = now.getSeconds();
+                    document.write('<div align="center" style="font:bold 40pt Century Gothic;">');
+                    if ( hour < 10 ) hour = "0" + hour;
+                    if ( minute < 10 ) minute = "0" + minute;
+                    if ( second < 10 ) second = "0" + second;
+                    document.write(hour+":"+minute+":"+second);
+                    document.write("</div>");
+                </script>
+</div>
         </div>
-      </div>
-      {% endfor %}
     </div>
-  </div>
-  </div>
+
   </body>
-</html>
+  </html>
