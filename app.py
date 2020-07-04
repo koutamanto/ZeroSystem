@@ -1,7 +1,7 @@
 # coding: utf-8
 import requests
 from bs4 import BeautifulSoup
-from flask import Flask,request,render_template
+from flask import Flask,request,render_template,redirect,url_for
 import time
 import urllib.request, urllib.error
 from apiclient.discovery import build
@@ -46,6 +46,8 @@ def index():
 
 @app.route("/result", methods=["post"])
 def result():
+    url = []
+    t = []
     word = request.form["word"]
     search_response = youtube.search().list(
         q=word,
@@ -65,6 +67,8 @@ def result():
         print(t)
         print(url)
     message = 'aaa'
+
     return render_template('index.html', data=zip(t,url))
+    return redirect()
 if __name__ == "__main__":
     app.run(debug=True)
