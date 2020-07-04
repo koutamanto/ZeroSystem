@@ -1,1 +1,1 @@
-web: gunicorn zerosystems : app
+web: gunicorn app : app
