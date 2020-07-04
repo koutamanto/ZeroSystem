@@ -15,19 +15,22 @@
     <div class="container-fluid">
         <div class="row pt-4 pl-4 pr-4">
             <div class="col-xl-4 bg-primary">
+                <div align="center" style="font:bold 40pt Century Gothic;" id="clock">
                 <script>
-                    var now = new Date();
-                    var hour = now.getHours();
-                    var minute = now.getMinutes();
-                    var second = now.getSeconds();
-                    document.write('<div align="center" style="font:bold 40pt Century Gothic;">');
-                    if ( hour < 10 ) hour = "0" + hour;
-                    if ( minute < 10 ) minute = "0" + minute;
-                    if ( second < 10 ) second = "0" + second;
-                    document.write(hour+":"+minute+":"+second);
-                    document.write("</div>");
+                    t = 0;
+                    var elem = document.getElementById("clock");
+             
+                    function clock(){
+                        var date = new Date();
+                        var hours = date.getHours();
+                        var minutes = date.getMinutes();
+                        var seconds = date.getSeconds();
+                        elem.innerHTML = hours+"時"+minutes+"分"+seconds+"秒" ;
+                    }
+             
+                    t = setInterval("clock()", 500);
                 </script>
-</div>
+            </div>
         </div>
     </div>
 
