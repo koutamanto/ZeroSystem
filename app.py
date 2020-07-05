@@ -22,7 +22,7 @@ youtube = build(
 
 app = Flask(__name__)
 
-@app.route("/index")
+@app.route("/")
 def index():
     search_response = youtube.search().list(
         q='ヒカキン',
@@ -69,6 +69,5 @@ def result():
     message = 'aaa'
 
     return render_template('index.html', data=zip(t,url))
-    return redirect()
 if __name__ == "__main__":
     app.run(debug=True)
