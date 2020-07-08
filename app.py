@@ -40,9 +40,9 @@ def send():
     lat = request.form["lat"]
     lng = request.form["lng"]
     acc = request.form["acc"]
-    print(data)
     print(lat)
     print(lng)
+    print(acc)
     return ''
 
 if __name__ == "__main__":
