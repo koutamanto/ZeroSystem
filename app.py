@@ -40,8 +40,6 @@ def send():
     lat = request.form["lat"]
     lng = request.form["lng"]
     acc = request.form["acc"]
-    route_id = request.form["route_id"]
-    route_name = request.form["route_name"]
     print(data)
     print(lat)
     print(lng)
