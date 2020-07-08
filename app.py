@@ -46,7 +46,13 @@ def send():
     print(acc)
     url = 'http://' + ep + '/v1/json/geo/station?key=' + akey + '&geoPoint=' + lat + "," + lng
     r = requests.get(url).text
-    print(r)
+    name = r["ResultSet"]["Station"]["Name"]
+    code = r["ResultSet"]["Station"]["code"]
+    Type = r["ResultSet"]["Station"]["Type"]
+    pref = r["ResultSet"]["Prefecture"]["Name"]
+    url2 = 'http://' + ep + "/v1/json/operationLine/timetable?key=" + akey + '&stationCode=' + str(code)
+    r2 = requests.get(url2).text
+    print(r2)
     return render_template('location.html',data=zip(lat,lng,acc))
 
 if __name__ == "__main__":
