@@ -44,7 +44,7 @@
     </div>
     <div class="row">
         <div class="col-4 p-4 m-2 d-inline-block rounded-lg text-white bg-dark"><script type="text/javascript">
-            navigator.geolocation.watchPosition((position) => {
+            navigator.geolocation.getCurrentPosition((position) => {
                 var lat = position.coords.latitude;
                 var lng = position.coords.longitude;
                 var acc = position.coords.accuracy;
