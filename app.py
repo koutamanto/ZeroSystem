@@ -2,7 +2,7 @@
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask,request,render_template,redirect,url_for
-import time
+import time,json
 import urllib.request, urllib.error
 from apiclient.discovery import build
 from apiclient.errors import HttpError
@@ -46,10 +46,15 @@ def send():
     print(acc)
     url = 'http://' + ep + '/v1/json/geo/station?key=' + akey + '&geoPoint=' + lat + "," + lng
     r = requests.get(url).text
+    r = json.loads(r)
     name = r["ResultSet"]["Point"]["Station"]["Name"]
     code = r["ResultSet"]["Point"]["Station"]["code"]
     Type = r["ResultSet"]["Point"]["Station"]["Type"]
     pref = r["ResultSet"]["Point"]["Prefecture"]["Name"]
+    print(name)
+    print(code)
+    print(Type)
+    print(pref)
     url2 = 'http://' + ep + "/v1/json/operationLine/timetable?key=" + akey + '&stationCode=' + str(code)
     r2 = requests.get(url2).text
     print(r2)
