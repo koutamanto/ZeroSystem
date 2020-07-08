@@ -35,7 +35,7 @@ def train():
     data = request,form["search"]
     print(data)
 
-@app.route('/', methods=['POST'])
+@app.route('/send-location', methods=['POST'])
 def send():
     lat = request.form["lat"]
     lng = request.form["lng"]
