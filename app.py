@@ -44,7 +44,7 @@ def send():
     print(lat)
     print(lng)
     print(acc)
-    url = 'http://' + ep + '/v1/json/geo/station?key=' + akey + '?geoPoint=' + lat + "," + lng
+    url = 'http://' + ep + '/v1/json/geo/station?key=' + akey + '&geoPoint=' + lat + "," + lng
     r = requests.get(url).text
     print(r)
     return render_template('location.html',data=zip(lat,lng,acc))
