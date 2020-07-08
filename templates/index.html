@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,13 +12,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
   </head>
-  <body class="bg-light">
+  <body class="bg-secondary">
     <nav class="navbar bg-primary">
-        <h2 style="color: white">ZeroSystem</h2>
+        <h2 style="color: white; background:">ZeroSystem</h2>
     </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-6 p-4 m-2 d-inline-block rounded-lg" style="background-color:black;">
+        <div class="col-6 p-4 m-2 d-inline-block rounded-lg bg-dark">
                 <div align="center" style="font:40pt Century Gothic; color:white;" id="clock">
                 <script>
                     t = 0;
@@ -28,28 +29,45 @@
                         var hours = date.getHours();
                         var minutes = date.getMinutes();
                         var seconds = date.getSeconds();
-                        elem.innerHTML = hours+":"+minutes+":"+seconds;
+                        elem.innerHTML = hours+":"+minutes;
                     }
              
                     t = setInterval("clock()", 500);
                 </script>
             </div>
         </div>
-        <div class="col-xs-4"></div>
+        <div class="col-4 p-4 p mt-2 mr-2 ml-2 mb-0 d-inline-block rounded-lg text-white bg-dark">weather<br>mark</div>
     </div>
     <div class="row h-25">
-        <div class="col-xs-6"></div>
-        <div class="col-xs-4"></div>
+        <div class="col-6 p-4 m-2 d-inline-block rounded-lg text-white bg-dark">G search</div>
+        <div class="col-4 p-4 mb-2 mr-2 ml-2 mt-0 d-inline-block rounded-lg text-white bg-dark">50.0℃</div>
     </div>
     <div class="row">
-        <div class="col-xs-5"></div>
-        <div class="col-xs-5"></div>
-    <div class="row">
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4"></div>
-    </div>
-    <div class="row"></div>
+        <div class="col-4 p-4 m-2 d-inline-block rounded-lg text-white bg-dark"><script type="text/javascript">
+            navigator.geolocation.watchPosition((position) => {
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+                var acc = position.coords.accuracy;
+                sendLocation(lat, lng, acc, route_id);
+            }, (error) => {
+                alert('GPS情報が取得できません．権限を確認してください')
+            }, {
+                enableHighAccuracy: true
+            });
+            function sendLocation(lat, lng, acc, route_id, route_name) {
+                var data = {
+                "lat": lat,
+                "lng": lng,
+                "acc": acc,
+                "route_id": route_id,
+                "route_name": route_name
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/send-location");
+            xhr.send(JSON.stringify(data));
+        }
+        </script></div>
+        <div class="col-6 p-4 m-2 d-inline-block rounded-lg text-white bg-dark">Y search</div>
 </div>
 
   </body>
