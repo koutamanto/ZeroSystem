@@ -9,7 +9,7 @@ from apiclient.errors import HttpError
 
 url = []
 t = []
-
+akey = "test_9cw6Q6SJ87R"
 DEVELOPER_KEY = 'AIzaSyC-daF5wvITHzm9y5pIHPvZiRfSYUW71xY'
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
@@ -19,55 +19,33 @@ youtube = build(
     YOUTUBE_API_VERSION,
     developerKey=DEVELOPER_KEY
     )
-
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    search_response = youtube.search().list(
-        q='ヒカキン',
-        part='id,snippet',
-        maxResults=50,
-        ).execute()
-
-    items = search_response["items"]
-
-    for item in items:
-        title = item["snippet"]["title"]
-        print(title)
-        thumb = item["snippet"]["thumbnails"]["high"]['url']
-        print(thumb)
-        url.append(thumb)
-        t.append(title)
-        print(t)
-        print(url)
-    message = 'aaa'
     return render_template('index.html', data=zip(t,url))
 
 @app.route("/result", methods=["post"])
 def result():
-    url = []
-    t = []
-    word = request.form["word"]
-    search_response = youtube.search().list(
-        q=word,
-        part='id,snippet',
-        maxResults=50,
-        ).execute()
+    word = request.form["search"]
+    print(word)
+    return render_template('result.html',result=word)
+@app.route("/train", methods=["post"])
+def train():
+    data = request,form["search"]
+    print(data)
 
-    items = search_response["items"]
+@app.route('/send-location', methods=['POST'])
+def send():
+    lat = request.form["lat"]
+    lng = request.form["lng"]
+    acc = request.form["acc"]
+    route_id = request.form["route_id"]
+    route_name = request.form["route_name"]
+    print(data)
+    print(lat)
+    print(lng)
+    return ''
 
-    for item in items:
-        title = item["snippet"]["title"]
-        print(title)
-        thumb = item["snippet"]["thumbnails"]["high"]['url']
-        print(thumb)
-        url.append(thumb)
-        t.append(title)
-        print(t)
-        print(url)
-    message = 'aaa'
-
-    return render_template('index.html', data=zip(t,url))
 if __name__ == "__main__":
     app.run(debug=True)

@@ -43,7 +43,9 @@
         <div class="col-4 p-4 mb-2 mr-2 ml-2 mt-0 d-inline-block rounded-lg text-white bg-dark">50.0℃</div>
     </div>
     <div class="row">
-        <div class="col-4 p-4 m-2 d-inline-block rounded-lg text-white bg-dark"><script type="text/javascript">
+        <div class="col-4 p-4 m-2 d-inline-block rounded-lg text-white bg-dark">
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+            <script type="text/javascript">
             navigator.geolocation.getCurrentPosition((position) => {
                 var lat = position.coords.latitude;
                 var lng = position.coords.longitude;
@@ -55,18 +57,32 @@
                 enableHighAccuracy: true
             });
             function sendLocation(lat, lng, acc, route_id, route_name) {
-                var data = {
-                "lat": lat,
-                "lng": lng,
-                "acc": acc,
-                "route_id": route_id,
-                "route_name": route_name
-            }
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/send-location");
-            xhr.send(JSON.stringify(data));
+                var fData = new FormData();
+                fData.append('lat', lat);
+                fData.append('lng', lng);
+                fData.append('acc', acc);
+                $.ajax({
+                //配信元のhttpsサーバーに返す場合
+                url: '/send-location',                            
+                //別サーバー（今回でいう画像処理サーバー）に返す場合
+                //url: 'https://192.168.0.100:12345/register',   
+                type: 'POST',
+                data: fData ,
+                contentType: false,
+                processData: false,
+                success: function(data, dataType) {
+                    //非同期で通信成功時に読み出される [200 OK 時]
+                    console.log('Success', data);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    //非同期で通信失敗時に読み出される
+                    console.log('Error : ' + errorThrown);
+                }
+        });
+
         }
-        </script></div>
+        </script>
+    </div>
         <div class="col-6 p-4 m-2 d-inline-block rounded-lg text-white bg-dark">Y search</div>
 </div>
 
