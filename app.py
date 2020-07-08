@@ -10,6 +10,7 @@ from apiclient.errors import HttpError
 url = []
 t = []
 akey = "test_9cw6Q6SJ87R"
+ep = "api.ekispert.jp"
 DEVELOPER_KEY = 'AIzaSyC-daF5wvITHzm9y5pIHPvZiRfSYUW71xY'
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
@@ -43,7 +44,10 @@ def send():
     print(lat)
     print(lng)
     print(acc)
-    return ''
+    url = 'http://' + ep + '/v1/json/geo/station?key=' + akey + '?geoPoint=' + lat + "," + lng
+    r = requests.get(url).text
+    print(r)
+    return render_template('location.html',data=zip(lat,lng,acc))
 
 if __name__ == "__main__":
     app.run(debug=True)
