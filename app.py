@@ -9,6 +9,7 @@ from apiclient.errors import HttpError
 
 url = []
 t = []
+wkey = "ee0eb7be159c4dbb10ff08289856905c"
 akey = "test_9cw6Q6SJ87R"
 ep = "api.ekispert.jp"
 DEVELOPER_KEY = 'AIzaSyC-daF5wvITHzm9y5pIHPvZiRfSYUW71xY'
@@ -44,21 +45,21 @@ def send():
     print(lat)
     print(lng)
     print(acc)
-    url = 'http://' + ep + '/v1/json/geo/station?key=' + akey + '&geoPoint=' + lat + "," + lng
-    r = requests.get(url).text
-    r = json.loads(r)
-    name = r["ResultSet"]["Point"]["Station"]["Name"]
-    code = r["ResultSet"]["Point"]["Station"]["code"]
-    Type = r["ResultSet"]["Point"]["Station"]["Type"]
-    pref = r["ResultSet"]["Point"]["Prefecture"]["Name"]
-    print(name)
-    print(code)
-    print(Type)
-    print(pref)
-    url2 = 'http://' + ep + "/v1/json/operationLine/timetable?key=" + akey + '&stationCode=' + str(code)
-    r2 = requests.get(url2).text
-    print(r2)
-    return render_template('location.html',data=zip(lat,lng,acc))
-
+    urlw = "http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid={2}".format(lat,lng,wkey)
+    rw = requests.get(urlw).text
+    rw = json.loads(rw)
+    city = rw["name"]
+    main = rw["weather"][0]["main"]
+    tempmax = float(rw["main"]["temp_max"]) - 273.15
+    tempmin = float(rw["main"]["temp_min"]) - 273.15
+    temp = float(rw["main"]["temp"]) - 273.15
+    feels = float(rw["main"]["feels_like"]) - 273.15
+    print(city)
+    print(main)
+    print(temp)
+    print(tempmin)
+    print(tempmax)
+    print(feels)
+    return render_template('index.html',temp=str(temp))
 if __name__ == "__main__":
     app.run(debug=True)

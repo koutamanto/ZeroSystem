@@ -11,6 +11,7 @@
     <!-- BootstrapのJS読み込み -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
   </head>
   <body class="bg-secondary">
     <nav class="navbar bg-primary">
@@ -39,8 +40,21 @@
         <div class="col-4 p-4 p mt-2 mr-2 ml-2 mb-0 d-inline-block rounded-lg text-white bg-dark">weather<br>mark</div>
     </div>
     <div class="row h-25">
-        <div class="col-6 p-4 m-2 d-inline-block rounded-lg text-white bg-dark">G search</div>
-        <div class="col-4 p-4 mb-2 mr-2 ml-2 mt-0 d-inline-block rounded-lg text-white bg-dark">50.0℃</div>
+        <div class="col-6 p-4 m-2 d-inline-block rounded-lg text-white bg-dark">
+            <div class="container h-100">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="searchbar">
+                        <input class="search_input" type="text" name="" placeholder="Search...">
+                        <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-4 mb-2 mr-2 ml-2 mt-0 d-inline-block rounded-lg text-white bg-dark">
+            {% if temp %}
+            <p>{{temp}}</p>
+            {% endif %}
+        </div>
     </div>
     <div class="row">
         <div class="col-4 p-4 m-2 d-inline-block rounded-lg text-white bg-dark">

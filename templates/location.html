@@ -40,7 +40,11 @@
     </div>
     <div class="row h-25">
         <div class="col-6 p-4 m-2 d-inline-block rounded-lg text-white bg-dark">G search</div>
-        <div class="col-4 p-4 mb-2 mr-2 ml-2 mt-0 d-inline-block rounded-lg text-white bg-dark">50.0℃</div>
+        <div class="col-4 p-4 mb-2 mr-2 ml-2 mt-0 d-inline-block rounded-lg text-white bg-dark">
+            {% if wdata %}
+            <p>{{wdata}}</p>
+            {% endif %}
+        </div>
     </div>
     <div class="row">
         <div class="col-4 p-4 m-2 d-inline-block rounded-lg text-white bg-dark">
